@@ -1,0 +1,43 @@
+{extends file="../templates/main.html"}
+
+{block name=kalk_kred}
+
+<div class="pure-g">
+
+	<div class="pure-u-1 form-box">
+	  <div class="l-box">
+		<h2>Oblicz ratę kredytu</h2>
+
+		<form class="pure-form" action="{$app_url}/app/calc.php" method="get">
+		  <input id="id_kwota"   type="text" name="kwota"   placeholder="Kwota"   value="{$form['kwota']}" />
+		  <input id="id_lata"    type="text" name="lata"    placeholder="Lata"    value="{$form['lata']}" />
+		  <input id="id_procent" type="text" name="procent" placeholder="Procent" value="{$form['procent']}" />
+
+		  <input type="submit" class="pure-button" value="Oblicz miesięczną ratę kredytu">
+		</form>
+	  </div>
+	</div>
+
+	<div class="results-container">
+
+	{* wyświetlenie listy błędów, jeśli istnieją *}
+	{if isset($messages)}
+		{if count($messages) > 0}
+			<ol class="message-list">
+			{foreach $messages as $msg}
+			{strip}
+				<li>{$msg}</li>
+			{/strip}
+			{/foreach}
+			</ol>
+		{/if}
+	{/if}
+
+	{if isset($rata)}
+		<div class="result">Miesięczna rata wynosi<br><span style="font-family: monospace; font-size: 2.5em;">{round($rata, 2)} zł</span></div>
+	{/if}
+	</div>
+
+</div>
+
+{/block}
